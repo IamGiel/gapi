@@ -37,7 +37,7 @@
 						<section id="event-container" class="col-sm-6">
 							<div class="event">
 								<div class="event-header">
-									Current Time
+									Current Event
 									<i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit Event"></i>
 								</div>
 								<div>
@@ -52,7 +52,30 @@
 						</section>
 						<section class="col-sm-6">
 							<div id="event-details">
-								Event Details
+								Event Details <br>
+								<form id="form">
+								  	<div class="form-group">
+										<label for="eventName">Event Name</label>
+										<input type="text" id="eventName" class="form-control">
+									</div>
+
+									<div class="form-group">
+										<label for="location">Location</label>
+										<input type="text" id="location" class="form-control">
+									</div>
+
+									<div class="form-group">
+										<label for="startTime">Start time (hh:mm)</label>
+										<input type="text" id="startTime" class="form-control">
+									</div>
+
+									<div class="form-group">
+										<label for="endTime">End time (hh:mm)</label>
+										<input type="text" id="endTime" class="form-control">
+									</div>
+
+									<button class="btn btn-default" id="newEvent" type="submit">Submit</button>
+								</form>
 							</div>
 						</section>
 						
@@ -63,9 +86,9 @@
 	</div>
 	<script type="text/javascript" src="Giel.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script async defer
+    <!-- <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbFH5WoUBGwol0jmrhMD-vkxDKqSsffoU&callback=initMap">
-        </script>
+        </script> -->
     <script async defer src="https://apis.google.com/js/api.js" 
       onload="this.onload=function(){};handleClientLoad()" 
       onreadystatechange="if (this.readyState === 'complete') this.onload()">

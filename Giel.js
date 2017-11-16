@@ -2,42 +2,43 @@
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
       // locate you.
-      var map, infoWindow;
-      function initMap() {
-        map = new google.maps.Map(document.getElementById('event-details'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 6
-        });
-      infoWindow = new google.maps.InfoWindow;
-      console.log(infoWindow);
-      // Try HTML5 geolocation.
-        if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(function(position) {
-            var pos = {
-              lat: position.coords.latitude,
-              lng: position.coords.longitude
-            };
-            console.log("navigator");
+      //===================== MAP =======================
+      // var map, infoWindow;
+      // function initMap() {
+      //   map = new google.maps.Map(document.getElementById('#'), {
+      //     center: {lat: -34.397, lng: 150.644},
+      //     zoom: 6
+      //   });
+      // infoWindow = new google.maps.InfoWindow;
+      // console.log(infoWindow);
+      // // Try HTML5 geolocation.
+      //   if (navigator.geolocation) {
+      //     navigator.geolocation.getCurrentPosition(function(position) {
+      //       var pos = {
+      //         lat: position.coords.latitude,
+      //         lng: position.coords.longitude
+      //       };
+      //       console.log("navigator");
 
-            infoWindow.setPosition(pos);
-            infoWindow.setContent('Location found.');
-            infoWindow.open(map);
-            map.setCenter(pos);
-          }, function() {
-            handleLocationError(true, infoWindow, map.getCenter());
-          });
-        } else {
-          // Browser doesn't support Geolocation
-          handleLocationError(false, infoWindow, map.getCenter());
-        }
-      }
-      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-        infoWindow.setPosition(pos);
-        infoWindow.setContent(browserHasGeolocation ?
-                              'Error: The Geolocation service failed.' :
-                              'Error: Your browser doesn\'t support geolocation.');
-        infoWindow.open(map);
-      }  
+      //       infoWindow.setPosition(pos);
+      //       infoWindow.setContent('Location found.');
+      //       infoWindow.open(map);
+      //       map.setCenter(pos);
+      //     }, function() {
+      //       handleLocationError(true, infoWindow, map.getCenter());
+      //     });
+      //   } else {
+      //     // Browser doesn't support Geolocation
+      //     handleLocationError(false, infoWindow, map.getCenter());
+      //   }
+      // }
+      // function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      //   infoWindow.setPosition(pos);
+      //   infoWindow.setContent(browserHasGeolocation ?
+      //                         'Error: The Geolocation service failed.' :
+      //                         'Error: Your browser doesn\'t support geolocation.');
+      //   infoWindow.open(map);
+      // }  
  // ================================================================= 
       // Client ID and API key from the Developer Console
       var CLIENT_ID = '957547373869-me0jf26toqdej2vbqaqcnb6v6r17r9qf.apps.googleusercontent.com';
@@ -100,6 +101,8 @@
       function handleSignoutClick(event) {
         gapi.auth2.getAuthInstance().signOut();
       }
+      //========== append UPCOMING EVENTS =======
+
       //============ UPCOMING EVENTS ============
       function listUpcomingEvents() {
         gapi.client.calendar.events.list({
@@ -138,23 +141,17 @@
         newSpan.attr("src", textContent);
         newSpan.attr("id", "event-time");
         $(".event-header").append(newSpan);
-
+        // ---
         var newSpanEvent = $("<span>");
         newSpanEvent.attr("src", textContent);
         newSpanEvent.attr("id", "event-title");
-        $(".event-time").append(newSpanEvent);
-        
+        $(".event-time").append(newSpanEvent);  
         var textContent = document.createTextNode(message);
         // console.log(textContent);
         // pre.appendChild(textContent);
-
       $("#event-title").html(textContent);
-
-
       } 
-
-      $("#time-now").html(new Date());//I added this to display
-      
+      $("#time-now").html(new Date());//I added this to display     
       //======= DATE MODIFIED ========
       function formatDate(date) {
         var monthNames = [
@@ -175,6 +172,7 @@
       var s = new Date();//added this to retrieve events for one day
       console.log(formatDate(s)); 
       $("#display-date").text(formatDate(s));
+      $(".event-header").text(moment(new Date()).format(" h : mm a"));//display the time on the header of each div-class header
       // s.setHours(currentHours);
       // s.setMinutes(0);
       // s.setSeconds(0);
@@ -211,17 +209,63 @@
             console.log("TIME NOW " + eventHour);
             //===========
             $("#event-time").html(eventHour);//this displays the time of the scheduled event
-            console.log("WHEN: " + when);
-            console.log("EVENT: " + event);
-            if (!when) {
+              console.log("WHEN: " + when);
+              console.log("EVENT: " + event);
+              if (!when) {
               when = event.start.date;           
               console.log("second one " + when)
             }
             appendPre(event.summary);
-            $("#time").html(when);
           }
         } else {
           appendPre('No upcoming events found.');
         }
       });
     }
+    //================Add Event Function===================
+      $("#newEvent").on("click", function execute(event) {
+      event.preventDefault();
+      var sum = $("#eventName").val().trim(); //IDs are for theoretical inputs in a form.
+      var loc = $("#location").val().trim();
+      var sTime = $("#startTime").val().trim();//needs to have date added to it- reconcile with our "day" variable?
+      var eTime = $("#endTime").val().trim(); //needs to have date attached, Google wants datetime.
+    //var tZone = 'America/New_York'; I'm not sure about this one. Could we
+    //grab the user's time zone? It's here because it's in the example. I 
+    //put it in so that we could hard set it for demonstration but if we can
+    //grab the user's time zone that would be preferable.
+      console.log("name of event: " + sum);
+      console.log("location: " + loc);
+      console.log("sTime: ", sTime);
+      console.log("eTime: ", eTime);
+      return gapi.client.calendar.events.insert({
+        "calendarId": "primary",
+        "sendNotifications": "false",
+        "supportsAttachments": "false",
+        "resource": {
+          "location": loc,
+          "summary": sum,
+          "start": {
+            "dateTime": sTime
+          },
+          "end": {
+            "dateTime": eTime
+          } //end close
+          },  // resource close
+        "alt": "json",
+        "prettyPrint": "true"
+      });  //return insert close
+
+      then(function(response) {
+              // Handle the results here (response.result has the parsed body).
+              console.log("Response", response);
+        }, function(error) {
+              console.error("Execute error", error);
+        });
+
+        gapi.load("client:auth2", function() {
+          gapi.auth2.init({client_id: '957547373869-me0jf26toqdej2vbqaqcnb6v6r17r9qf.apps.googleusercontent.com'});
+        });
+
+        
+
+    });// onClick close   
