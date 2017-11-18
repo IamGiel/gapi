@@ -64,7 +64,7 @@ main {
 	width: 30%;
 	height: 75px;
 	line-height: 75px;
-	font-size: 1.75em;
+	font-size: 1em;
 	text-align: center;
 }
 
@@ -101,13 +101,14 @@ i, #sign-out {
     background-color: rgb(255,255,255);
     border-radius: 4px;
     font-size: 1em;
+    float: left;
    
 }
 
 .event-header {
-    text-align: left;
-    border-bottom: 2px solid rgb(237,239,245);
-    margin-bottom: 20px;
+	text-align: left;
+	border-bottom: 2px solid rgb(237,239,245);
+	margin-bottom: 20px
 }
 
 
@@ -119,5 +120,8 @@ i, #sign-out {
     background-color: rgb(255,255,255);
     border-radius: 4px;
     background-color: darkgray;
+}
+span {
+	float:left;
 }
 

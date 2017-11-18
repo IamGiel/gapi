@@ -22,9 +22,9 @@
 		<div id="content-wrapper" class="full-height float-right">
 			<header>
 				<ul class="flex-container">
-					<li class="flex-item">Calendar</li>
+					<li class="flex-item">Hydra</li>
 					<li class="flex-item">Weather/Time</li>
-					<li id="sign-out" class="flex-item"><button id="authorize-button">Sign In</button><button id="signout-button">Sign Out</button></li>
+					<li id="sign-out" class="flex-item"><button class="btn btn-primary" id="authorize-button">Sign In</button><button class="btn btn-primary" id="signout-button">Sign Out</button></li>
 					<li class="flex-item"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i><span id="display-date"></span><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></li>
 				</ul>
 			</header>
@@ -34,21 +34,18 @@
 						<i class="fa fa-plus-circle fa-2x" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Add Event"></i>
 					</div>
 					<div class="row">
-						<section id="event-container" class="col-sm-6">
+						<section id="event-container" class="col-sm-6 timeHeader">
+							<!-- =================== -->
 							<div class="event">
 								<div class="event-header">
-									Current Event
+								
 									<i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit Event"></i>
 								</div>
-								<div>
-									<span id="event-time"></span>&nbsp|&nbsp<span id="event-title"></span>
+								<div id="spans">
+									<span id="event-time"></span><span id="event-title"></span>
 								</div>
 							</div>
-							<div class="event">
-								<div class="event-header">
-									<i class="fa fa-pencil" aria-hidden="true" data-toggle="tooltip" data-placement="top" title="Edit Event"></i>
-								</div>
-							</div>
+							<!-- =================== -->
 						</section>
 						<section class="col-sm-6">
 							<div id="event-details">
@@ -84,11 +81,11 @@
 			</main>
 		</div>
 	</div>
-	<script type="text/javascript" src="Giel.js"></script>
+	<script type="text/javascript" src="gel.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <!-- <script async defer
+    <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbFH5WoUBGwol0jmrhMD-vkxDKqSsffoU&callback=initMap">
-        </script> -->
+        </script>
     <script async defer src="https://apis.google.com/js/api.js" 
       onload="this.onload=function(){};handleClientLoad()" 
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
