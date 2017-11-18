@@ -101,7 +101,7 @@ i, #sign-out {
     background-color: rgb(255,255,255);
     border-radius: 4px;
     font-size: 1em;
-    float: left;
+    
    
 }
 
@@ -121,7 +121,7 @@ i, #sign-out {
     border-radius: 4px;
     background-color: darkgray;
 }
-span {
+/*span {
 	float:left;
 }
-
+*/

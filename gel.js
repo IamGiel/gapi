@@ -1,3 +1,6 @@
+      
+
+
       // Note: This example requires that you consent to location sharing when
       // prompted by your browser. If you see the error "The Geolocation service
       // failed.", it means you probably did not give permission for the browser to
@@ -40,14 +43,29 @@
         infoWindow.open(map);
       }  
  // ================================================================= 
+      //Calls getWeather() when document is ready
+       $( window ).on( "load", function(){
+
+        getWeather(); 
+        calendarDate();
+        startTime();
+
+       });
+
+
+      //Google 0Auth
+      //=========================
+
       // Client ID and API key from the Developer Console
-      var CLIENT_ID = '957547373869-me0jf26toqdej2vbqaqcnb6v6r17r9qf.apps.googleusercontent.com';
-      var API_KEY = 'AIzaSyAbFH5WoUBGwol0jmrhMD-vkxDKqSsffoU';
+      var CLIENT_ID = '908655633390-bipca08v5p9tkot7cjul1pgtcbd4ts10.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyCcz_rY6GhH9tTnejrKQgbxXu7y8CM2Fjg';
+
       // Array of API discovery doc URLs for APIs used by the quickstart
       var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+
       // Authorization scopes required by the API; multiple scopes can be
       // included, separated by spaces.
-      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly ";
+      var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
       var authorizeButton = document.getElementById('authorize-button');
       var signoutButton = document.getElementById('signout-button');
 
