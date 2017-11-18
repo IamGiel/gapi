@@ -23,7 +23,7 @@
 			<header>
 				<ul class="flex-container">
 					<li class="flex-item">Hydra</li>
-					<li class="flex-item">Weather/Time</li>
+					<li class="flex-item"><span id="weather-icon"></span>&nbsp|&nbsp<span id="temp"></span>&nbsp|&nbsp<span id="clock"></span></li>
 					<li id="sign-out" class="flex-item"><button class="btn btn-primary" id="authorize-button">Sign In</button><button class="btn btn-primary" id="signout-button">Sign Out</button></li>
 					<li class="flex-item"><i class="fa fa-arrow-circle-left" aria-hidden="true"></i><span id="display-date"></span><i class="fa fa-arrow-circle-right" aria-hidden="true"></i></li>
 				</ul>
@@ -81,7 +81,7 @@
 			</main>
 		</div>
 	</div>
-	<script type="text/javascript" src="gel.js"></script>
+	
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAbFH5WoUBGwol0jmrhMD-vkxDKqSsffoU&callback=initMap">
@@ -90,5 +90,6 @@
       onload="this.onload=function(){};handleClientLoad()" 
       onreadystatechange="if (this.readyState === 'complete') this.onload()">
     </script>
+    <script type="text/javascript" src="gel.js"></script>
   </body>
 </html>

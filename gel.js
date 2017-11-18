@@ -43,11 +43,10 @@
         infoWindow.open(map);
       }  
  // ================================================================= 
-      //Calls getWeather() when document is ready
+      // Calls getWeather() when document is ready
        $( window ).on( "load", function(){
 
         getWeather(); 
-        calendarDate();
         startTime();
 
        });
@@ -128,12 +127,12 @@
       // </div>
       
       
-      $("#time-now").html(new Date());//I added this to display     
+      $("#time-now").html(new Date());//I added this to display current time     
        // ========= current hours momentJS formatting =========
       var currentHours = moment(new Date()).format("YYYY-MM-DDT01:mm:ssZ");
       console.log("MIN: " + currentHours);
       //==== API call for events at current time =======
-      var s = moment(new Date()).format(" MMMM DD YYYY ");//added this to retrieve events for one day
+      var s = moment(new Date()).format(" MMMM DD YYYY ");
       // console.log(formatDate(s)); 
       $("#display-date").text(s);
       $("<div class='timeHeader'></div>").prepend("<b>" + "Current Time " + "</b>" + moment(new Date()).format(" h : mm a"));//display the time on the header of each div-class header
@@ -189,6 +188,60 @@
         $("#event-title").append("<div class='event'>" + "<div class='event-header'>"+ "<span>" + eventHour + "&nbsp|&#8594&nbsp" + message + "</span>" + "</div>" + "</div>");
         } 
       });
+    }
+    //Weather
+    //https://home.openweathermap.org
+    //=========================
+
+    var ApiKeyOWM = "079b3bb7acbb509e98d70fdbdb2f77fd";
+
+    //api.openweathermap.org/data/2.5/weather?q={city name},{country code}
+    //api.openweathermap.org/data/2.5/weather?q=Raleigh,US&APPID=079b3bb7acbb509e98d70fdbdb2f77fd
+    var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=Raleigh,US" + "&APPID=" +  ApiKeyOWM;
+    console.log(queryURL);
+
+    //Stores OWM call information
+    // var weatherObject = ;
+
+    function getWeather() {
+      console.log("inside getWeather");
+
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      }).done(function(response) {
+        console.log(response);
+        console.log(response.weather[0].icon);
+        console.log(response.main.temp);
+
+        var imgDiv = "<img src='" + "http://openweathermap.org/img/w/" + response.weather[0].icon + ".png'" + ">";
+        console.log(imgDiv);
+        $("#weather-icon").empty();
+        $("#weather-icon").append(imgDiv);
+        $("#temp").empty();
+        //Converts from Kelvin to F
+        $("#temp").append((((9/5) * (response.main.temp - 273)) + 32).toPrecision(2) + "  F");
+       
+      });
+    }
+
+    //Time
+    //=========================
+
+    function startTime() {
+        var today = new Date();
+        var h = today.getHours();
+        var m = today.getMinutes();
+        var s = today.getSeconds();
+        m = checkTime(m);
+        s = checkTime(s);
+
+        $("#clock").text(h + ":" + m + ":" + s);
+        var t = setTimeout(startTime, 500);  //whatever this is, the clock stops without it.
+    }
+    function checkTime(i) {
+        if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+        return i;
     }
     //================ ADD EVENT ===================
     //   $("#newEvent").on("click", function execute(event) {
