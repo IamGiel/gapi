@@ -56,8 +56,8 @@
       //=========================
 
       // Client ID and API key from the Developer Console
-      var CLIENT_ID = '908655633390-bipca08v5p9tkot7cjul1pgtcbd4ts10.apps.googleusercontent.com';
-      var API_KEY = 'AIzaSyCcz_rY6GhH9tTnejrKQgbxXu7y8CM2Fjg';
+      var CLIENT_ID = '957547373869-me0jf26toqdej2vbqaqcnb6v6r17r9qf.apps.googleusercontent.com';
+      var API_KEY = 'AIzaSyAbFH5WoUBGwol0jmrhMD-vkxDKqSsffoU';
 
       // Array of API discovery doc URLs for APIs used by the quickstart
       var DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
@@ -168,11 +168,10 @@
             //====using momentJS time format======= 
             var eventHour = "<b>" + "This hour of " + "</b>" + "&nbsp" + moment(when).format(" hh : mm a");
             console.log("TIME THIS HAPPENS " + eventHour);
-            //===========
-            // $("#event-time").html(eventHour);//this displays the time of the scheduled event
+            //====
               if (!when) {
               when = event.start.dateTime;           
-            }
+              }
             appendPre(event.summary);
           }
         } else {
